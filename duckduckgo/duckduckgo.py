@@ -1,47 +1,10 @@
+"""python wrapper for the duck duck go zero-click api"""
 import urllib
 import urllib2
 import json as j
 
 
 def search(query, **kwargs):
-    """
-    Abstract: topic summary (can contain HTML, e.g. italics)
-    AbstractText: topic summary (with no HTML)
-    AbstractSource: name of Abstract source
-    AbstractURL: deep link to expanded topic page in AbstractSource
-    Image: link to image that goes with Abstract
-    Heading: name of topic that goes with Abstract
-
-    Answer: instant answer
-    AnswerType: type of Answer, e.g. calc, color, digest, info, ip, iploc, phone, pw, rand, regexp, unicode, upc, or zip (see goodies & tech pages for examples).
-
-    Definition: dictionary definition (may differ from Abstract)
-    DefinitionSource: name of Definition source
-    DefinitionURL: deep link to expanded definition page in DefinitionSource
-
-    RelatedTopics: array of internal links to related topics associated with Abstract
-      Result: HTML link(s) to related topic(s)
-      FirstURL: first URL in Result
-      Icon: icon associated with related topic(s)
-        URL: URL of icon
-        Height: height of icon (px)
-        Width: width of icon (px)
-      Text: text from first URL
-
-    Results: array of external links associated with Abstract
-      Result: HTML link(s) to external site(s)
-      FirstURL: first URL in Result
-      Icon: icon associated with FirstURL
-        URL: URL of icon
-        Height: height of icon (px)
-        Width: width of icon (px)
-      Text: text from FirstURL
-
-    Type: response category, i.e. A (article), D (disambiguation), C (category), N (name), E (exclusive), or nothing.
-
-    Redirect: !bang redirect URL
-    """
-
     useragent = 'py-ddg'
     params = {
         'q': query,
@@ -71,7 +34,7 @@ def search(query, **kwargs):
         import traceback
         print traceback.format_exec()
     import sys
-    sys.exit()
+    sys.exit("Error attempting to search " + url)
 
 
 class Results(object):

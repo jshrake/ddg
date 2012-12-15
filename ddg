@@ -40,42 +40,36 @@ def main():
 
     'Loop through each query'
     for query in queries:
-        'Prefix your query'
+        'Prefix the query'
         query = prefix + query
 
         'Get a response from www.duckduck.com using the duckduckgo module'
-        response = duckduckgo.search(query)
+        results = duckduckgo.search(query)
 
         'If the user requested the raw JSON output, print it now and continue to the next query'
         if args.json:
-            print response.json
+            print results.json
             continue
 
-        'Define a response priority to determine where to look for an answer'
-        if args.bang or args.lucky or args.search:
-            response_priority = ['redirect', 'result', 'abstract']
-        else:
-            response_priority = ['answer', 'abstract', 'result']
+        'Define a response priority to determine what order to look for an answer'
+        redirect_mode = args.bang or args.search or args.lucky
+        results_priority = ['redirect', 'result', 'abstract'] if redirect_mode else ['answer',  'abstract', 'result']
 
-        'Handle the -d prefix if needed'
-        if args.define:
-            response_priority.insert(0, 'definition')
-        else:
-            response_priority.append('definition')
+        'Insert the definition priority at the front or second to last depending on the -d flag'
+        results_priority.insert(0 if args.define else len(results_priority) - 1, 'definition')
 
-        ''
-        failed = True
-        var = 'url' if args.url or args.bang or args.search or args.lucky else 'text'
-        for r in response_priority:
-            result = getattr(getattr(response, r), var)
+        'Search for an answer and respond accordingly based on user input args'
+        failed_to_find_answer = True
+        for r in results_priority:
+            result = getattr(getattr(results, r), 'url' if (redirect_mode or args.url) else 'text')
             if result:
-                open_url_in_browser(result) if ((args.bang or args.search or args.lucky) and not args.url) else print_result(result)
-                failed = False
+                open_url_in_browser(result) if (redirect_mode and not args.url) else print_result(result)
+                failed_to_find_answer = False
                 break
 
         'Let the user know if no answer was found'
-        if failed:
-            if response.type == 'disambiguation':
+        if failed_to_find_answer:
+            if results.type == 'disambiguation':
                 print 'Your query was ambiguous, please be more specific'
             else:
                 print 'No results found'
@@ -83,16 +77,18 @@ def main():
 
 def open_url_in_browser(url):
     """Attempts to open the passed url in the browser using an appropriate shell command (xdg-open, open, or start)"""
-    'Support linux, mac, and windows'
     shell_cmds = ['xdg-open', 'open', 'start']
     for shell_cmd in shell_cmds:
         status, tmp = commands.getstatusoutput(shell_cmd)
         if status == 0 or status == 256:
-            cmd = shell_cmd + ' ' + url
-            'Launch the url using the appropriate shell command'
-            process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
-            process.communicate()[0]
-            return
+            try:
+                'Launch the url using the appropriate shell command'
+                cmd = shell_cmd + ' ' + url
+                process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
+                process.communicate()[0]
+                return
+            except Exception:
+                print 'Something went wrong using the command: ' + cmd
 
 
 def print_result(result):
