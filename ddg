@@ -1,0 +1,106 @@
+#!/usr/bin/env python
+
+import duckduckgo
+import argparse
+import subprocess
+import sys
+import commands
+
+__version__ = 0.1
+
+
+def main():
+    'Build the parser and parse the arguments'
+    parser = argparse.ArgumentParser('www.duckduckgo.com zero click api for your shell')
+    parser.add_argument('query', nargs='*', help='the search query')
+    parser.add_argument('-b', '--bang', action='store_true', help='prefixes your query with !')
+    parser.add_argument('-d', '--define', action='store_true', help='prefixes your query with define')
+    parser.add_argument('-j', '--json', action='store_true', help='returns the raw json output')
+    parser.add_argument('-l', '--lucky', action='store_true', help='launches the first url found')
+    parser.add_argument('-s', '--search', action='store_true', help='launch a search on www.duckduckgo.com')
+    parser.add_argument('-u', '--url', action='store_true', help='returns urls found rather than text')
+    args = parser.parse_args()
+
+    'Determine the list of queries'
+    if len(args.query) > 0:
+        queries = [' '.join(args.query)]
+    elif not sys.stdin.isatty():
+        queries = sys.stdin.read().splitlines()
+    else:
+        parser.print_help()
+        return
+
+    'Determine if we need to add any prefixes based on user flags'
+    prefix = '!ddg ' if args.search else ('!' if args.bang else ('define' if args.define else ''))
+
+    'Loop through each query'
+    for query in queries:
+        'Prefix your query'
+        query = prefix + query
+        'Get the results'
+        response = duckduckgo.search(query)
+        'If the user requested the raw JSON output, print it now'
+        if args.json:
+            print response.json
+
+        'Did the user request a !bang rederict? Rederict and return early'
+        if args.bang or args.search or args.lucky:
+            response_priority = ['redirect', 'results', 'abstract', 'definition']
+            for r in response_priority:
+                tmp = getattr(response, r)
+                if isinstance(tmp, list) and len(tmp) > 0:
+                    url = tmp[0].url
+                elif not isinstance(tmp, list):
+                    url = tmp.url
+                if url != '':
+                    open_url_in_browser(url)
+                    break
+            continue
+
+        'Text output continues below'
+        if args.define:
+            response_priority = ['definition', 'answer']
+        else:
+            response_priority = ['answer', 'abstract', 'results', 'definition']
+
+        text_or_url = 'url' if args.url else 'text'
+        printed = False
+        for r in response_priority:
+            if print_result(getattr(response, r), text_or_url):
+                printed = True
+                break
+
+        'Let the user know if no answer was found'
+        if not printed:
+            print 'No results'
+
+
+def open_url_in_browser(url):
+    'Support linux, mac, and windows'
+    shell_cmds = ['xdg-open', 'open', 'start']
+    for shell_cmd in shell_cmds:
+        status, tmp = commands.getstatusoutput(shell_cmd)
+        if status == 0 or status == 256:
+            cmd = shell_cmd + ' ' + url
+            'Launch the url using the appropriate shell command'
+            process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
+            process.communicate()[0]
+            return
+
+
+def print_result(result, var):
+        if hasattr(result, var) and getattr(result, var) != '':
+            line_to_print = getattr(result, var)
+            try:
+                print line_to_print
+            except RuntimeError:
+                print line_to_print.encode('ascii', 'ignore')
+            except:
+                print "Unexpected error attempting to print result"
+                exit()
+            return True
+        return False
+
+
+if __name__ == "__main__":
+    main()
