@@ -55,12 +55,23 @@ def search(query, **kwargs):
     enc_params = urllib.urlencode(params)
     url = 'http://api.duckduckgo.com/?' + enc_params
 
-    request = urllib2.Request(url, headers={'User-Agent': useragent})
-    response = urllib2.urlopen(request)
-    json = j.loads(response.read())
-    response.close()
-
-    return Results(json)
+    try:
+        request = urllib2.Request(url, headers={'User-Agent': useragent})
+        response = urllib2.urlopen(request)
+        json = j.loads(response.read())
+        response.close()
+        return Results(json)
+    except urllib2.HTTPError, err:
+        print 'HTTPError = ' + str(err.code)
+    except urllib2.URLError, err:
+        print 'URLError = ' + str(err.reason)
+    except urllib2.HTTPException:
+        print 'HTTPException'
+    except Exception:
+        import traceback
+        print traceback.format_exec()
+    import sys
+    sys.exit()
 
 
 class Results(object):
@@ -70,7 +81,7 @@ class Results(object):
                      'C': 'category', 'N': 'name',
                      'E': 'exclusive', '': 'nothing'}[json['Type']]
         self.answer = Answer(json)
-        self.result = Result(json)
+        self.result = Result(json.get('Results', None))
         self.abstract = Abstract(json)
         self.definition = Definition(json)
         self.redirect = Redirect(json)
@@ -78,11 +89,9 @@ class Results(object):
 
 class Result(object):
     def __init__(self, json):
-        if len(json['Results']) > 0:
-            json = json['Results'][0]
-            self.html = json['Result']
-            self.text = json['Text']
-            self.url = json['FirstURL']
+        self.html = json[0].get('Result', '') if json else ''
+        self.text = json[0].get('Text', '') if json else ''
+        self.url = json[0].get('FirstURL', '') if json else ''
 
 
 class Abstract(object):
@@ -98,6 +107,7 @@ class Answer(object):
     def __init__(self, json):
         self.text = json['Answer']
         self.type = json['AnswerType']
+        self.url = None
 
 
 class Definition(object):

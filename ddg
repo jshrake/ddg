@@ -1,15 +1,15 @@
 #!/usr/bin/env python
-
-import duckduckgo
-import argparse
-import subprocess
+"""www.duckduckgo.com zero click api for your shell"""
 import sys
 import commands
-
-__version__ = 0.1
+import subprocess
+import argparse
+import duckduckgo
 
 
 def main():
+    """Controls the flow of the ddg application"""
+
     'Build the parser and parse the arguments'
     parser = argparse.ArgumentParser('www.duckduckgo.com zero click api for your shell')
     parser.add_argument('query', nargs='*', help='the search query')
@@ -18,12 +18,11 @@ def main():
     parser.add_argument('-j', '--json', action='store_true', help='returns the raw json output')
     parser.add_argument('-l', '--lucky', action='store_true', help='launches the first url found')
     parser.add_argument('-s', '--search', action='store_true', help='launch a search on www.duckduckgo.com')
-    parser.add_argument('-t', '--text', action='store_true', help='returns text, the default option')
     parser.add_argument('-u', '--url', action='store_true', help='returns urls found rather than text')
     args = parser.parse_args()
 
-    'Determine the list of queries'
-    if len(args.query) > 0:
+    'Get the queries'
+    if args.query:
         queries = [' '.join(args.query)]
     elif not sys.stdin.isatty():
         queries = sys.stdin.read().splitlines()
@@ -32,53 +31,58 @@ def main():
         return
 
     'Determine if we need to add any prefixes based on user flags'
-    prefix = '!ddg ' if args.search else ('!' if args.bang else ('define' if args.define else ''))
+    prefix = 'define ' if args.define else ''
+
+    if args.search:
+        prefix = '!ddg ' + prefix
+    elif args.bang:
+        prefix = '! ' + prefix
 
     'Loop through each query'
     for query in queries:
         'Prefix your query'
         query = prefix + query
 
-        'Get a response from ddg'
+        'Get a response from www.duckduck.com using the duckduckgo module'
         response = duckduckgo.search(query)
 
-        'If the user requested the raw JSON output, print it now'
+        'If the user requested the raw JSON output, print it now and continue to the next query'
         if args.json:
             print response.json
             continue
 
-        'Define a response priority to determine where to look for responses first'
+        'Define a response priority to determine where to look for an answer'
         if args.bang or args.lucky or args.search:
-            response_priority = ['redirect', 'result', 'abstract', 'definition']
-
-            'Did the user request a !bang rederict? Rederict and return early'
-            if args.bang or args.search or args.lucky:
-                for r in response_priority:
-                    result = getattr(response, r)
-                    if result.url != '':
-                        if not args.url:
-                            open_url_in_browser(result.url)
-                        else:
-                            print_result(result, 'url')
-                        break
-                continue
-        elif args.define:
-            response_priority = ['definition', 'answer']
+            response_priority = ['redirect', 'result', 'abstract']
         else:
-            response_priority = ['answer', 'abstract', 'result', 'definition']
+            response_priority = ['answer', 'abstract', 'result']
 
-        text_or_url = 'url' if args.url else 'text'
-        printed = False
+        'Handle the -d prefix if needed'
+        if args.define:
+            response_priority.insert(0, 'definition')
+        else:
+            response_priority.append('definition')
+
+        ''
+        failed = True
+        var = 'url' if args.url or args.bang or args.search or args.lucky else 'text'
         for r in response_priority:
-            print_result(getattr(response, r), text_or_url)
-            continue
+            result = getattr(getattr(response, r), var)
+            if result:
+                open_url_in_browser(result) if ((args.bang or args.search or args.lucky) and not args.url) else print_result(result)
+                failed = False
+                break
 
         'Let the user know if no answer was found'
-        if not printed:
-            print 'No results'
+        if failed:
+            if response.type == 'disambiguation':
+                print 'Your query was ambiguous, please be more specific'
+            else:
+                print 'No results found'
 
 
 def open_url_in_browser(url):
+    """Attempts to open the passed url in the browser using an appropriate shell command (xdg-open, open, or start)"""
     'Support linux, mac, and windows'
     shell_cmds = ['xdg-open', 'open', 'start']
     for shell_cmd in shell_cmds:
@@ -91,15 +95,14 @@ def open_url_in_browser(url):
             return
 
 
-def print_result(result, var):
-        if hasattr(result, var) and getattr(result, var) != '':
-            line_to_print = getattr(result, var)
-            try:
-                print line_to_print
-            except RuntimeError:
-                print line_to_print.encode('ascii', 'ignore')
-            except:
-                print "Unexpected error attempting to print result"
+def print_result(result):
+    """Print the result, ascii encode if necessary"""
+    try:
+        print result
+    except RuntimeError:
+        print result.encode('ascii', 'ignore')
+    except:
+        print "Unexpected error attempting to print result"
 
 
 if __name__ == "__main__":
