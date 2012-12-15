@@ -68,10 +68,9 @@ class Results(object):
         self.json = j.dumps(json, indent=2)
         self.type = {'A': 'article', 'D': 'disambiguation',
                      'C': 'category', 'N': 'name',
-                     'E': 'exclusive', '': 'nothing'}[json.get('Type', '')]
+                     'E': 'exclusive', '': 'nothing'}[json['Type']]
         self.answer = Answer(json)
-        self.related = [Result(elem) for elem in json.get('RelatedTopics', [])]
-        self.results = [Result(elem) for elem in json.get('Results', [])]
+        self.result = Result(json)
         self.abstract = Abstract(json)
         self.definition = Definition(json)
         self.redirect = Redirect(json)
@@ -79,33 +78,35 @@ class Results(object):
 
 class Result(object):
     def __init__(self, json):
-        self.html = json.get('Result')
-        self.text = json.get('Text')
-        self.url = json.get('FirstURL')
+        if len(json['Results']) > 0:
+            json = json['Results'][0]
+            self.html = json['Result']
+            self.text = json['Text']
+            self.url = json['FirstURL']
 
 
 class Abstract(object):
     def __init__(self, json):
-        self.html = json.get('Abstract', '')
-        self.text = json.get('AbstractText', '')
-        self.url = json.get('AbstractURL', '')
-        self.source = json.get('AbstractSource')
-        self.heading = json.get('Heading', '')
+        self.html = json['Abstract']
+        self.text = json['AbstractText']
+        self.url = json['AbstractURL']
+        self.source = json['AbstractSource']
+        self.heading = json['Heading']
 
 
 class Answer(object):
     def __init__(self, json):
-        self.text = json.get('Answer')
-        self.type = json.get('AnswerType', '')
+        self.text = json['Answer']
+        self.type = json['AnswerType']
 
 
 class Definition(object):
     def __init__(self, json):
-        self.text = json.get('Definition', '')
-        self.url = json.get('DefinitionURL')
-        self.source = json.get('DefinitionSource')
+        self.text = json['Definition']
+        self.url = json['DefinitionURL']
+        self.source = json['DefinitionSource']
 
 
 class Redirect(object):
     def __init__(self, json):
-        self.url = json.get('Redirect', '')
+        self.url = json['Redirect']

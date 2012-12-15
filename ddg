@@ -18,6 +18,7 @@ def main():
     parser.add_argument('-j', '--json', action='store_true', help='returns the raw json output')
     parser.add_argument('-l', '--lucky', action='store_true', help='launches the first url found')
     parser.add_argument('-s', '--search', action='store_true', help='launch a search on www.duckduckgo.com')
+    parser.add_argument('-t', '--text', action='store_true', help='returns text, the default option')
     parser.add_argument('-u', '--url', action='store_true', help='returns urls found rather than text')
     args = parser.parse_args()
 
@@ -37,38 +38,40 @@ def main():
     for query in queries:
         'Prefix your query'
         query = prefix + query
-        'Get the results'
+
+        'Get a response from ddg'
         response = duckduckgo.search(query)
+
         'If the user requested the raw JSON output, print it now'
         if args.json:
             print response.json
-
-        'Did the user request a !bang rederict? Rederict and return early'
-        if args.bang or args.search or args.lucky:
-            response_priority = ['redirect', 'results', 'abstract', 'definition']
-            for r in response_priority:
-                tmp = getattr(response, r)
-                if isinstance(tmp, list) and len(tmp) > 0:
-                    url = tmp[0].url
-                elif not isinstance(tmp, list):
-                    url = tmp.url
-                if url != '':
-                    open_url_in_browser(url)
-                    break
             continue
 
-        'Text output continues below'
-        if args.define:
+        'Define a response priority to determine where to look for responses first'
+        if args.bang or args.lucky or args.search:
+            response_priority = ['redirect', 'result', 'abstract', 'definition']
+
+            'Did the user request a !bang rederict? Rederict and return early'
+            if args.bang or args.search or args.lucky:
+                for r in response_priority:
+                    result = getattr(response, r)
+                    if result.url != '':
+                        if not args.url:
+                            open_url_in_browser(result.url)
+                        else:
+                            print_result(result, 'url')
+                        break
+                continue
+        elif args.define:
             response_priority = ['definition', 'answer']
         else:
-            response_priority = ['answer', 'abstract', 'results', 'definition']
+            response_priority = ['answer', 'abstract', 'result', 'definition']
 
         text_or_url = 'url' if args.url else 'text'
         printed = False
         for r in response_priority:
-            if print_result(getattr(response, r), text_or_url):
-                printed = True
-                break
+            print_result(getattr(response, r), text_or_url)
+            continue
 
         'Let the user know if no answer was found'
         if not printed:
@@ -97,9 +100,6 @@ def print_result(result, var):
                 print line_to_print.encode('ascii', 'ignore')
             except:
                 print "Unexpected error attempting to print result"
-                exit()
-            return True
-        return False
 
 
 if __name__ == "__main__":
