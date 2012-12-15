@@ -1,24 +1,25 @@
 ===
 ddg
 ===
+www.duckduckgo.com zero click api for your shell
 
 Usage
 ===
 www.duckduckgo.com zero click api for your shell [-h] [-b] [-d] [-j]
                                                  [-l] [-s] [-u]
                                                  [query [query ...]]
-
-positional arguments:
+  
+positional arguments:  
   query         the search query
-
-optional arguments:
-  -h, --help    show this help message and exit
-  -b, --bang    prefixes your query with !
-  -d, --define  prefixes your query with define
-  -j, --json    returns the raw json output
-  -l, --lucky   launches the first url found
-  -s, --search  launch a search on www.duckduckgo.com
-  -u, --url     returns urls found rather than text
+  
+optional arguments:  
+  -h, --help    show this help message and exit  
+  -b, --bang    prefixes your query with !  
+  -d, --define  prefixes your query with define  
+  -j, --json    returns the raw json output  
+  -l, --lucky   launches the first url found  
+  -s, --search  launch a search on www.duckduckgo.com  
+  -u, --url     returns urls found rather than text  
 
 Examples
 ===
