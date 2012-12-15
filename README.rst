@@ -1,14 +1,13 @@
 ===== 
 ddg
 ===== 
-www.duckduckgo.com zero click api for your shell
+duck duck go zero click api for your shell
 
 ===== 
 Usage
 ===== 
-www.duckduckgo.com zero click api for your shell [-h] [-b] [-d] [-j]
-                                                 [-l] [-s] [-u]
-                                                 [query [query ...]]
+
+www.duckduckgo.com zero click api for your shell [-h] [-b] [-d] [-j] [-l] [-s] [-u] [query [query ...]]
   
 positional arguments:  
   query         the search query
