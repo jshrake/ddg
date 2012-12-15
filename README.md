@@ -1,4 +1,3 @@
-===
 ddg
 ===
 www.duckduckgo.com zero click api for your shell
@@ -10,9 +9,11 @@ www.duckduckgo.com zero click api for your shell [-h] [-b] [-d] [-j]
                                                  [query [query ...]]
   
 positional arguments:  
+---
   query         the search query
   
-optional arguments:  
+optional arguments:
+---  
   -h, --help    show this help message and exit  
   -b, --bang    prefixes your query with !  
   -d, --define  prefixes your query with define  
