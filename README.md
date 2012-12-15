@@ -25,14 +25,20 @@ Examples
 ddg Ryan Gosling
 >Ryan Thomas Gosling is a Canadian actor and musician.
 
+ddg rt Drive -b
+>Equivalent to doing !rt Drive on www.duckduckgo.com, redirecting to the rotten tomatoes Drive page
+
+ddg my ip
+>Your IP address is <ip> in <location>
+
+ddg 2*10+3*0
+>2 * 10 + 3 * 0 = 20
+
 echo "shark" | ddg -u
 >https://en.wikipedia.org/wiki/Shark
 
 ddg Barack Obama -j >> file.txt
 >Returns the json output of the search and inserts it to a file
-
-ddg rt Drive -b
->Equivalent to doing !rt Drive on www.duckduckgo.com, redirecting to the rotten tomatoes Drive page
 
 
 Requires
