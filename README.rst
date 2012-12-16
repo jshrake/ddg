@@ -19,7 +19,7 @@ positional arguments:
   
 optional arguments:  
   -h, --help    show this help message and exit  
-  -b, --bang    prefixes your query with ! and launches the redirect in your browser'  
+  -b, --bang    prefixes your query with ! and launches the redirect in your browser  
   -d, --define  prefixes your query with define  
   -j, --json    returns the raw json output  
   -l, --lucky   launches the first url found in your browser  
