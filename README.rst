@@ -61,5 +61,4 @@ ddg Abraham Lincoln -j >> file.txt
 Thanks
 =======
 | The duckduckgo module is a modification from http://github.com/crazedpsyc/python-duckduckgo.  
-| Original source: http://github.com/mikejs/python-duckduckgo (outdated)  
-| Copyright Michael Stephens <me@mikej.st>, released under a BSD-style license.
+| Original duckduckgo module source from http://github.com/mikejs/python-duckduckgo (outdated)  
