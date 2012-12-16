@@ -29,27 +29,34 @@ Examples
 ========= 
 
 ddg abelian group
->>>In abstract algebra, an abelian group, also called a commutative group, is a group in which the result of applying the group operation to two group elements does not depend on their order (the axiom of commutativity).
+
+    In abstract algebra, an abelian group, also called a commutative group, is a group in which the result of applying the group operation to two group elements does not depend on their order (the axiom of commutativity).
 
 ddg rt Drive -b
->>>Equivalent to doing !rt Drive on www.duckduckgo.com
->>>Launches your browser and opens to the Rotten Tomatoes page for *Drive*
+
+    Equivalent to doing !rt Drive on www.duckduckgo.com
+    Launches your browser and opens to the Rotten Tomatoes page for *Drive*
 
 ddg py webbrowser -b
->>>Equivalent to doing !py webbrowser on www.duckduckgo.com
->>>Launches your browser and opens the Python documenation page for the webbrowser module
+
+    Equivalent to doing !py webbrowser on www.duckduckgo.com
+    Launches your browser and opens the Python documenation page for the webbrowser module
 
 ddg my ip
->>>Your IP address is <ip> in <location>
+
+    Your IP address is <ip> in <location>
 
 ddg 2*10+3*0
->>>2 * 10 + 3 * 0 = 20
+
+    2 * 10 + 3 * 0 = 20
 
 echo "shark" | ddg -u
->>>https://en.wikipedia.org/wiki/Shark
+
+    https://en.wikipedia.org/wiki/Shark
 
 ddg Abraham Lincoln -j >> file.txt
->>>Returns the raw json output from the duckduckgo zero-click api query and inserts it to a file
+
+    Returns the raw json output from the duckduckgo zero-click api query and inserts it to a file
 
 Thanks
 =======
