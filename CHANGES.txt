@@ -1,1 +1,2 @@
 v0.1.1, 12/15/12 -- Initial release.
+v0.1.4, 12/15/12 -- Using webbrowser rather than os dependent Popen commands
