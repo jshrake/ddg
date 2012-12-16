@@ -34,15 +34,13 @@ ddg abelian group
 
 ddg rt Drive -b
 
-    Equivalent to doing !rt Drive on www.duckduckgo.com
-
-    Launches your browser and opens to the Rotten Tomatoes page for *Drive*
+    | Equivalent to doing !rt Drive on www.duckduckgo.com
+    | Launches your browser and opens to the Rotten Tomatoes page for *Drive*
 
 ddg py webbrowser -b
 
-    Equivalent to doing !py webbrowser on www.duckduckgo.com  
-
-    Launches your browser and opens the Python documenation page for the webbrowser module
+    | Equivalent to doing !py webbrowser on www.duckduckgo.com  
+    | Launches your browser and opens the Python documenation page for the webbrowser module
 
 ddg my ip
 
@@ -62,8 +60,6 @@ ddg Abraham Lincoln -j >> file.txt
 
 Thanks
 =======
-
-The duckduckgo module is a modification from http://github.com/crazedpsyc/python-duckduckgo.  
-
-Original source: http://github.com/mikejs/python-duckduckgo (outdated)  
-Copyright Michael Stephens <me@mikej.st>, released under a BSD-style license.
+| The duckduckgo module is a modification from http://github.com/crazedpsyc/python-duckduckgo.  
+| Original source: http://github.com/mikejs/python-duckduckgo (outdated)  
+| Copyright Michael Stephens <me@mikej.st>, released under a BSD-style license.
