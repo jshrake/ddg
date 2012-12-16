@@ -27,9 +27,9 @@ setup(
     install_requires=requires,
     entry_points=entry_points,
     classifiers=[
-         'Development Status :: 3 - Alpha',
+         'Development Status :: 4 - Beta',
          'Environment :: Console',
-         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+         'License :: OSI Approved :: MIT License',
          'Operating System :: OS Independent',
          'Programming Language :: Python :: 2.7',
          'Topic :: Internet :: WWW/HTTP',
