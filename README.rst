@@ -34,12 +34,14 @@ ddg abelian group
 
 ddg rt Drive -b
 
-    Equivalent to doing !rt Drive on www.duckduckgo.com  
+    Equivalent to doing !rt Drive on www.duckduckgo.com
+
     Launches your browser and opens to the Rotten Tomatoes page for *Drive*
 
 ddg py webbrowser -b
 
     Equivalent to doing !py webbrowser on www.duckduckgo.com  
+    
     Launches your browser and opens the Python documenation page for the webbrowser module
 
 ddg my ip
