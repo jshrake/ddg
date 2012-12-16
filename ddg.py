@@ -12,14 +12,14 @@ def main():
     """Controls the flow of the ddg application"""
 
     'Build the parser and parse the arguments'
-    parser = argparse.ArgumentParser('www.duckduckgo.com zero click api for your shell')
+    parser = argparse.ArgumentParser('www.duckduckgo.com zero click api for your command-line')
     parser.add_argument('query', nargs='*', help='the search query')
-    parser.add_argument('-b', '--bang', action='store_true', help='prefixes your query with !')
+    parser.add_argument('-b', '--bang', action='store_true', help='prefixes your query with ! and launches the redirect in your browser')
     parser.add_argument('-d', '--define', action='store_true', help='prefixes your query with define')
     parser.add_argument('-j', '--json', action='store_true', help='returns the raw json output')
-    parser.add_argument('-l', '--lucky', action='store_true', help='launches the first url found')
+    parser.add_argument('-l', '--lucky', action='store_true', help='launches the first url found in your browser')
     parser.add_argument('-s', '--search', action='store_true', help='launch a search on www.duckduckgo.com')
-    parser.add_argument('-u', '--url', action='store_true', help='returns urls found rather than text')
+    parser.add_argument('-u', '--url', action='store_true', help='returns a url rather than text')
     args = parser.parse_args()
 
     'Get the queries'

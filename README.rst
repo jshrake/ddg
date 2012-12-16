@@ -1,7 +1,7 @@
 ===== 
 ddg
 ===== 
-duck duck go zero click api for your shell
+duck duck go zero click api for your command-line
 
 =======
 Install
@@ -12,19 +12,19 @@ pip install ddg
 Usage
 ======
 
-www.duckduckgo.com zero click api for your shell [-h] [-b] [-d] [-j] [-l] [-s] [-u] [query [query ...]]
+www.duckduckgo.com zero click api for your command-line [-h] [-b] [-d] [-j] [-l] [-s] [-u] [query [query ...]]
   
 positional arguments:  
   query         the search query
   
 optional arguments:  
   -h, --help    show this help message and exit  
-  -b, --bang    prefixes your query with !  
+  -b, --bang    prefixes your query with ! and launches the redirect in your browser'  
   -d, --define  prefixes your query with define  
   -j, --json    returns the raw json output  
-  -l, --lucky   launches the first url found  
+  -l, --lucky   launches the first url found in your browser  
   -s, --search  launch a search on www.duckduckgo.com  
-  -u, --url     returns urls found rather than text  
+  -u, --url     returns a url rather than text  
 
 ========= 
 Examples

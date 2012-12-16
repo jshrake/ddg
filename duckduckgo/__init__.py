@@ -1,2 +1,1 @@
 from duckduckgo import search
-
