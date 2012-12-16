@@ -32,6 +32,10 @@ ddg abelian group
 
     In abstract algebra, an abelian group, also called a commutative group, is a group in which the result of applying the group operation to two group elements does not depend on their order (the axiom of commutativity).
 
+dg wa integral of sin x / x from negative inf to inf -b
+
+    | Launches your browser and opens the Wolfram Alpha result
+
 ddg rt Drive -b
 
     | Equivalent to doing !rt Drive on www.duckduckgo.com

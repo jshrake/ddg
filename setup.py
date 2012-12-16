@@ -15,7 +15,7 @@ entry_points = {
 
 setup(
     name='ddg',
-    version='0.1.5',
+    version='0.1.6',
     author='justinls',
     author_email='heartlessjunkie@gmail.com',
     packages=['duckduckgo'],
