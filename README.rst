@@ -41,7 +41,7 @@ ddg rt Drive -b
 ddg py webbrowser -b
 
     Equivalent to doing !py webbrowser on www.duckduckgo.com  
-    
+
     Launches your browser and opens the Python documenation page for the webbrowser module
 
 ddg my ip
@@ -62,6 +62,8 @@ ddg Abraham Lincoln -j >> file.txt
 
 Thanks
 =======
-The duckduckgo module is a modification from http://github.com/crazedpsyc/python-duckduckgo.
-Original source: http://github.com/mikejs/python-duckduckgo (outdated)
+
+The duckduckgo module is a modification from http://github.com/crazedpsyc/python-duckduckgo.  
+
+Original source: http://github.com/mikejs/python-duckduckgo (outdated)  
 Copyright Michael Stephens <me@mikej.st>, released under a BSD-style license.
