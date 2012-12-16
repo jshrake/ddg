@@ -1,4 +1,5 @@
 """python wrapper for the duck duck go zero-click api"""
+
 import urllib
 import urllib2
 import json as j

@@ -22,7 +22,7 @@ setup(
     scripts=['ddg.py'],
     url='https://github.com/justinls/ddg',
     license='LICENSE.txt',
-    description='www.duckduckgo.com zero click api for your shell',
+    description='www.duckduckgo.com zero-click api for your shell',
     long_description=open('README').read(),
     install_requires=requires,
     entry_points=entry_points,

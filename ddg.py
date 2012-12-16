@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 """www.duckduckgo.com zero click api for your shell"""
+
 import sys
 import commands
 import subprocess
