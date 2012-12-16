@@ -3,6 +3,11 @@ ddg
 ===== 
 duck duck go zero click api for your shell
 
+=======
+Install
+=======
+pip install ddg
+
 ===== 
 Usage
 ===== 
@@ -43,9 +48,5 @@ echo "shark" | ddg -u
 ddg Barack Obama -j >> file.txt
     Returns the json output of the search and inserts it to a file
 
-========= 
-Requires
-========= 
-Python 2.7.3 or greater
 
 
