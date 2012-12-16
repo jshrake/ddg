@@ -10,7 +10,7 @@ except ImportError:
 entry_points = {
     'console_scripts': [
         'ddg = ddg:main',
-   ]
+    ]
 }
 
 setup(
@@ -31,6 +31,7 @@ setup(
          'Environment :: Console',
          'License :: OSI Approved :: MIT License',
          'Operating System :: OS Independent',
+         'Programming Language :: Python :: 2.6',
          'Programming Language :: Python :: 2.7',
          'Topic :: Internet :: WWW/HTTP',
          'Topic :: Software Development :: Libraries :: Python Modules',
