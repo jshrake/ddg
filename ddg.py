@@ -36,7 +36,7 @@ def main():
     if args.search:
         prefix = '!ddg ' + prefix
     elif args.bang:
-        prefix = '! ' + prefix
+        prefix = '!' + prefix
 
     'Loop through each query'
     for query in queries:
