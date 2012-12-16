@@ -11,7 +11,7 @@ Install
 Usage
 ======
 
-usage: www.duckduckgo.com zero-click api for your command-line [-h] [-b] [-d] [-j] [-l] [-s] [-u] [query [query ...]]  
+www.duckduckgo.com zero-click api for your command-line [-h] [-b] [-d] [-j] [-l] [-s] [-u] [query [query ...]]  
 
 positional arguments:  
   query         the search query  
