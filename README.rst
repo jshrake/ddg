@@ -45,5 +45,5 @@ ddg 2*10+3*0
 echo "shark" | ddg -u
     https://en.wikipedia.org/wiki/Shark
 
-ddg Barack Obama -j >> file.txt
-    Returns the json output of the search and inserts it to a file
+ddg Abraham Lincoln -j >> file.txt
+    Returns the raw json output from the duckduckgo zero-click api query and inserts it to a file
