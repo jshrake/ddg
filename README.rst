@@ -47,6 +47,3 @@ echo "shark" | ddg -u
 
 ddg Barack Obama -j >> file.txt
     Returns the json output of the search and inserts it to a file
-
-
-
