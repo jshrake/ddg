@@ -1,9 +1,8 @@
 #!/usr/bin/env python
-"""www.duckduckgo.com zero click api for your shell"""
+"""www.duckduckgo.com zero-click api for your command-line"""
 
 import sys
-import commands
-import subprocess
+import webbrowser
 import argparse
 import duckduckgo
 
@@ -12,14 +11,14 @@ def main():
     """Controls the flow of the ddg application"""
 
     'Build the parser and parse the arguments'
-    parser = argparse.ArgumentParser('www.duckduckgo.com zero click api for your command-line')
+    parser = argparse.ArgumentParser('www.duckduckgo.com zero-click api for your command-line')
     parser.add_argument('query', nargs='*', help='the search query')
-    parser.add_argument('-b', '--bang', action='store_true', help='prefixes your query with ! and launches the redirect in your browser')
-    parser.add_argument('-d', '--define', action='store_true', help='prefixes your query with define')
+    parser.add_argument('-b', '--bang', action='store_true', help='prefix query with ! and launch the redirect url')
+    parser.add_argument('-d', '--define', action='store_true', help='prefix query with define')
     parser.add_argument('-j', '--json', action='store_true', help='returns the raw json output')
-    parser.add_argument('-l', '--lucky', action='store_true', help='launches the first url found in your browser')
+    parser.add_argument('-l', '--lucky', action='store_true', help='launch the first url found')
     parser.add_argument('-s', '--search', action='store_true', help='launch a search on www.duckduckgo.com')
-    parser.add_argument('-u', '--url', action='store_true', help='returns a url rather than text')
+    parser.add_argument('-u', '--url', action='store_true', help='return the url of the result found')
     args = parser.parse_args()
 
     'Get the queries'
@@ -64,7 +63,7 @@ def main():
         for r in results_priority:
             result = getattr(getattr(results, r), 'url' if (redirect_mode or args.url) else 'text')
             if result:
-                open_url_in_browser(result) if (redirect_mode and not args.url) else print_result(result)
+                webbrowser.open_new_tab(result) if (redirect_mode and not args.url) else print_result(result)
                 failed_to_find_answer = False
                 break
 
@@ -74,22 +73,6 @@ def main():
                 print 'Your query was ambiguous, please be more specific'
             else:
                 print 'No results found'
-
-
-def open_url_in_browser(url):
-    """Attempts to open the passed url in the browser using an appropriate shell command (xdg-open, open, or start)"""
-    shell_cmds = ['xdg-open', 'open', 'start']
-    for shell_cmd in shell_cmds:
-        status, tmp = commands.getstatusoutput(shell_cmd)
-        if status == 0 or status == 256:
-            try:
-                'Launch the url using the appropriate shell command'
-                cmd = shell_cmd + ' ' + url
-                process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
-                process.communicate()[0]
-                return
-            except Exception:
-                print 'Something went wrong using the command: ' + cmd
 
 
 def print_result(result):
