@@ -32,10 +32,6 @@ ddg abelian group
 
     In abstract algebra, an abelian group, also called a commutative group, is a group in which the result of applying the group operation to two group elements does not depend on their order (the axiom of commutativity).
 
-ddg wa integral of sin x / x from negative inf to inf -b
-
-    | Launches your browser and opens the Wolfram Alpha result
-
 ddg rt Drive -b
 
     | Equivalent to doing !rt Drive on www.duckduckgo.com
@@ -45,6 +41,14 @@ ddg py webbrowser -b
 
     | Equivalent to doing !py webbrowser on www.duckduckgo.com  
     | Launches your browser and opens the Python documenation page for the webbrowser module
+
+ddg wa integral of sin x / x from negative inf to inf -b
+
+    | Launches your browser and opens the Wolfram Alpha result
+
+dg so [c++11] lambda return values -b
+
+    | Launches your browser and opens the Stack Overflow result for lambda return values filtered by the c++11 tag
 
 ddg my ip
 
