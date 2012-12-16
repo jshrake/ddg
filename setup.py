@@ -15,7 +15,7 @@ entry_points = {
 
 setup(
     name='ddg',
-    version='0.1.1',
+    version='0.1.2',
     author='justinls',
     author_email='heartlessjunkie@gmail.com',
     packages=['duckduckgo'],
@@ -23,7 +23,7 @@ setup(
     url='https://github.com/justinls/ddg',
     license='LICENSE.txt',
     description='www.duckduckgo.com zero-click api for your shell',
-    long_description=open('README').read(),
+    long_description=open('README.rst').read(),
     install_requires=requires,
     entry_points=entry_points,
     classifiers=[
