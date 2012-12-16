@@ -6,7 +6,7 @@ duck duck go zero-click api for your command-line
 Install
 =======
 
->>>pip install ddg
+    pip install ddg
 
 Usage
 ======
