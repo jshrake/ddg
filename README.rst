@@ -8,9 +8,9 @@ Install
 =======
 pip install ddg
 
-===== 
+======
 Usage
-===== 
+====== 
 
 www.duckduckgo.com zero click api for your shell [-h] [-b] [-d] [-j] [-l] [-s] [-u] [query [query ...]]
   
