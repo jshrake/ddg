@@ -13,6 +13,8 @@ entry_points = {
     ]
 }
 
+README = open('README.rst').read()
+
 setup(
     name='ddg',
     version='0.2.0',
@@ -21,9 +23,8 @@ setup(
     packages=['duckduckgo'],
     scripts=['ddg.py'],
     url='https://github.com/justinls/ddg',
-    license=open('LICENSE').read(),
     description='www.duckduckgo.com zero-click api for your command-line',
-    long_description=open('README.rst').read(),
+    long_description=README,
     install_requires=requires,
     entry_points=entry_points,
     classifiers=[

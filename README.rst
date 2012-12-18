@@ -2,6 +2,7 @@
 ddg
 ===== 
 `Duck Duck Go`_ zero-click api for your command-line
+
 Install
 =======
 ::
@@ -86,6 +87,7 @@ Feeling lucky? Launch the `Python webbrowser documentation`_ directly with `-l`
 
 You can launch a `search on Duck Duck Go`_ with the `-s` flag
 ::
+
     $ ddg Lord of the Rings -s
 
 ddg plays nice with all the unix-like utilities you know and love
