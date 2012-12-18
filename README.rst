@@ -1,14 +1,15 @@
-===== 
 ddg
 ===== 
 `Duck Duck Go`_ zero-click api for your command-line
 
 Install
 =======
+::
 
     pip install ddg
 
 or from the source:
+::
 
     python setup.py install
 
