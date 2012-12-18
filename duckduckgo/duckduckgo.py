@@ -2,7 +2,7 @@
 
 import urllib
 import urllib2
-import json as j
+import json as jsonlib
 
 
 def search(query, **kwargs):
@@ -22,25 +22,23 @@ def search(query, **kwargs):
     try:
         request = urllib2.Request(url, headers={'User-Agent': useragent})
         response = urllib2.urlopen(request)
-        json = j.loads(response.read())
+        json = jsonlib.loads(response.read())
         response.close()
         return Results(json)
     except urllib2.HTTPError, err:
         print 'HTTPError = ' + str(err.code)
     except urllib2.URLError, err:
         print 'URLError = ' + str(err.reason)
-    except urllib2.HTTPException:
-        print 'HTTPException'
     except Exception:
-        import traceback
-        print traceback.format_exec()
+        print 'Unhandled exception'
+        raise
     import sys
-    sys.exit("Error attempting to search " + url)
+    sys.exit("Unable to process " + query + " please try again.")
 
 
 class Results(object):
     def __init__(self, json):
-        self.json = j.dumps(json, indent=2)
+        self.json = jsonlib.dumps(json, indent=2)
         self.type = {'A': 'article', 'D': 'disambiguation',
                      'C': 'category', 'N': 'name',
                      'E': 'exclusive', '': 'nothing'}[json['Type']]
