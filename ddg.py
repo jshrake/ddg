@@ -39,39 +39,37 @@ def main():
         return
 
     'Determine if we need to add any prefixes based on user flags'
-    prefix = 'define ' if args.define else ''
-
-    if args.search:
-        prefix = '!ddg ' + prefix
-    elif args.bang:
-        prefix = '!' + prefix
+    prefix = get_prefix_for_query(args)
 
     'Loop through each query'
     for query in queries:
         'Prefix the query'
         query = prefix + query
 
-        'Get a response from www.duckduck.com using the duckduckgo module'
+        'Get a response from api.duckduck.com using the duckduckgo module'
         results = duckduckgo.search(query)
 
-        'If the user requested the raw JSON output, print it now and continue to the next query'
+        'Print the raw json output and return'
         if args.json:
-            print results.json
+            print_result(results.json)
             continue
 
-        'Define a response priority to determine what order to look for an answer'
-        redirect_mode = args.bang or args.search or args.lucky
-        results_priority = ['redirect', 'result', 'abstract'] if redirect_mode else ['answer',  'abstract', 'result']
+        'a list of where to look for an answer first'
+        results_priority = get_results_priority(args)
 
-        'Insert the definition priority at the front or second to last depending on the -d flag'
-        results_priority.insert(0 if args.define else len(results_priority) - 1, 'definition')
+        'do we want the text or url output of the answer found'
+        var = get_text_or_url(args)
 
-        'Search for an answer and respond accordingly based on user input args'
+        'action to perform when an answer is found'
+        action = get_action(args)
+
+        'Search for an answer and perform an action'
         failed_to_find_answer = True
         for r in results_priority:
-            result = getattr(getattr(results, r), 'url' if (redirect_mode or args.url) else 'text')
+            result = getattr(getattr(results, r), var)
+
             if result:
-                webbrowser.open_new_tab(result) if (redirect_mode and not args.url) else print_result(result)
+                action(result)
                 failed_to_find_answer = False
                 break
 
@@ -81,6 +79,47 @@ def main():
                 print 'Your query was ambiguous, please be more specific'
             else:
                 print 'No results found'
+
+
+def get_results_priority(args):
+    """Return a result priority list based on user input"""
+    redirect_mode = args.bang or args.search or args.lucky
+    if redirect_mode:
+        results_priority = ['redirect', 'result', 'abstract', 'definition']
+    else:
+        results_priority = ['answer',  'abstract',  'definition', 'result']
+
+    return results_priority
+
+
+def get_action(args):
+    """Return a function to launch the web browser or print a result"""
+    redirect_mode = args.bang or args.search or args.lucky
+    if redirect_mode and not args.url:
+        return webbrowser.open_new_tab
+    else:
+        return print_result
+
+
+def get_text_or_url(args):
+    """Determine if we need text or url output"""
+    redirect_mode = args.bang or args.search or args.lucky
+    if redirect_mode or args.url:
+        return 'url'
+    else:
+        return 'text'
+
+
+def get_prefix_for_query(args):
+    """Build the prefix based on user input"""
+    prefix = 'define ' if args.define else ''
+
+    if args.search:
+        prefix = '!ddg ' + prefix
+    elif args.bang:
+        prefix = '!' + prefix
+
+    return prefix
 
 
 def print_result(result):
