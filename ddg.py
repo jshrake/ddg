@@ -18,7 +18,7 @@ def main():
     parser.add_argument('-b', '--bang', action='store_true',
                         help='prefix query with ! and launch the redirect url')
     parser.add_argument('-d', '--define', action='store_true',
-                        help='attempt to return the definition')
+                        help='return the definition')
     parser.add_argument('-j', '--json', action='store_true',
                         help='returns the raw json output')
     parser.add_argument('-l', '--lucky', action='store_true',
