@@ -1,7 +1,7 @@
+=====
 ddg
 ===== 
 `Duck Duck Go`_ zero-click api for your command-line
-
 Install
 =======
 ::
@@ -13,10 +13,8 @@ or from the source:
 
     python setup.py install
 
-
 Usage
 ======
-
 www.duckduckgo.com zero-click api for your command-line [-h] [-b] [-d] [-j] [-l] [-s] [-u] [query [query ...]]  
 
 positional arguments:  
@@ -33,7 +31,6 @@ optional arguments:
 
 Examples
 ========= 
-
 Call ddg from your command line to access the `Duck Duck Go Zero-Click Info API`_
 
 :: 
