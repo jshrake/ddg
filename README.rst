@@ -24,7 +24,7 @@ positional arguments:
 optional arguments:  
   -h, --help    show this help message and exit  
   -b, --bang    prefix query with ! and launch the redirect url  
-  -d, --define  prefix query with define  
+  -d, --define  attempt to return the definition  
   -j, --json    returns the raw json output  
   -l, --lucky   launch the first url found  
   -s, --search  launch a search on www.duckduckgo.com  
@@ -40,22 +40,28 @@ Call ddg from your command line to access the `Duck Duck Go Zero-Click Info API`
     $ ddg my ip
     Your IP address is <ip> in <location>
 
-:: 
-
-    $ ddg 2*10+3*0
-    2 * 10 + 3 * 0 = 20
-
 ::
     
     $ ddg schnauzer
     A schnauzer is a dog breed that originated in Germany in the 15th and 16th centuries.
 
-If you want the url of the answer source you can use the `-u` flag
-
+Use the `-u` flag to return the url of the answer source.
 :: 
 
     $ ddg schnauzer -u
     https://en.wikipedia.org/wiki/Schnauzer
+
+You can get a definition using the `-d` flag
+::
+
+    $ ddg catfish -d
+    catfish definition: any of an order (Siluriformes) of chiefly freshwater stout-bodied scaleless bony fishes having long tactile barbels.
+
+Combinining flags behaves as expected
+::
+
+    $ ddg catfish -d -u
+    http://www.merriam-webster.com/dictionary/catfish
 
 You can use the `-b` flag to launch a `!Bang redirect`_ in your browser
 
@@ -86,17 +92,17 @@ You can launch a `search on Duck Duck Go`_ with the `-s` flag
 ddg plays nice with all the unix-like utilities you know and love
 ::
 
-   $ echo "shark" | ddg -l
+   $ echo "shark" | ddg -d -l
 
 Use `-j` to output the `json response`_ from the API
 ::
 
     $ ddg simpsons characters -j >> file.txt
 
-You can even do a silly thing such as
+Attempt to print definition urls for all file and folder names in your current directory
 ::
 
-    $ ls | ddg -u
+    $ ls | ddg -du
 
 Thanks
 =======
