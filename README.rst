@@ -1,12 +1,17 @@
 ===== 
 ddg
 ===== 
-duck duck go zero-click api for your command-line
+`Duck Duck Go`_ zero-click api for your command-line
 
 Install
 =======
 
     pip install ddg
+
+or from the source:
+
+    python setup.py install
+
 
 Usage
 ======
@@ -28,45 +33,77 @@ optional arguments:
 Examples
 ========= 
 
-ddg abelian group
+Call ddg from your command line to access the `Duck Duck Go Zero-Click Info API`_
 
-    In abstract algebra, an abelian group, also called a commutative group, is a group in which the result of applying the group operation to two group elements does not depend on their order (the axiom of commutativity).
-
-ddg rt Drive -b
-
-    | Equivalent to doing !rt Drive on www.duckduckgo.com
-    | Launches your browser and opens to the Rotten Tomatoes page for *Drive*
-
-ddg py webbrowser -b
-
-    | Equivalent to doing !py webbrowser on www.duckduckgo.com  
-    | Launches your browser and opens the Python documenation page for the webbrowser module
-
-ddg wa integral of sin x / x from negative inf to inf -b
-
-    | Launches your browser and opens the Wolfram Alpha result
-
-dg so [c++11] lambda return values -b
-
-    | Launches your browser and opens the Stack Overflow result for lambda return values filtered by the c++11 tag
-
-ddg my ip
-
+:: 
+    
+    $ ddg my ip
     Your IP address is <ip> in <location>
 
-ddg 2*10+3*0
+:: 
 
+    $ ddg 2*10+3*0
     2 * 10 + 3 * 0 = 20
 
-echo "shark" | ddg -u
+::
+    
+    $ ddg schnauzer
+    A schnauzer is a dog breed that originated in Germany in the 15th and 16th centuries.
 
-    https://en.wikipedia.org/wiki/Shark
+If you want the url of the answer source you can use the `-u` flag
 
-ddg Abraham Lincoln -j >> file.txt
+:: 
 
-    Returns the raw json output from the duckduckgo zero-click api query and inserts it to a file
+    $ ddg schnauzer -u
+    https://en.wikipedia.org/wiki/Schnauzer
+
+Or you can use the `-l` flag which will launch the url in a new tab of your browser
+
+::
+
+    $ ddg schnauzer -l
+
+You can use the -b (--bang) flag to launch a `!Bang redirect`_ in your browser
+
+Launch the `Python'_ documentation page for the webbrowser module
+::
+
+    $ ddg py webbrowser -b
+
+Launch a query on `Wolfram Alpha`_
+::
+
+    $ ddg wa integral of sin x / x from negative inf to inf -b
+
+Launch a search on `Stack Overflow`_
+::
+
+    $ ddg so [c++11] lambda return values -b
+
+You can search directly on `Duck Duck Go`_ with the `-s` flag
+::
+    $ ddg The Simpsons -s
+
+ddg plays nice with all the unix-like utilities you know and love
+
+::
+
+   $ echo "shark" | ddg -l
+   Launches `https://en.wikipedia.org/wiki/Shark <https://en.wikipedia.org/wiki/Shark>` in your web browser
+
+    $ ddg Abraham Lincoln -j >> file.txt
+    Returns the 'raw json output <http://api.duckduckgo.com/?q=Abraham+Lincoln&format=json&pretty=1>` from the duckduckgo zero-click api query and inserts it to a file
 
 Thanks
 =======
 | The duckduckgo module is a modification from http://github.com/crazedpsyc/python-duckduckgo.  
 | Original duckduckgo module source from http://github.com/mikejs/python-duckduckgo (outdated)  
+
+.. _Duck Duck Go: http://www.duckduckgo.com
+.. _Duck Duck Go Zero-Click Info API: http://http://api.duckduckgo.com/
+.. _!Bang redirect: http://duckduckgo.com/bang.html
+.. _Python: http://www.python.com
+.. _Rotten Tomatoes: http://www.rottentomatoes.com
+.. _Stack Overflow: http://www.stackoverflow.com
+.. _Wolfram Alpha: http://www.wolframalpha.com
+.. _https://en.wikipedia.org/wiki/Schnauzer: https://en.wikipedia.org/wiki/Schnauzer
