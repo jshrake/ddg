@@ -15,13 +15,13 @@ entry_points = {
 
 setup(
     name='ddg',
-    version='0.1.7',
+    version='0.2.0',
     author='justinls',
     author_email='heartlessjunkie@gmail.com',
     packages=['duckduckgo'],
     scripts=['ddg.py'],
     url='https://github.com/justinls/ddg',
-    license='LICENSE.txt',
+    license=open('LICENSE').read(),
     description='www.duckduckgo.com zero-click api for your command-line',
     long_description=open('README.rst').read(),
     install_requires=requires,
