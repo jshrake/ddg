@@ -55,7 +55,8 @@ You can get a definition using the `-d` flag
 ::
 
     $ ddg catfish -d
-    catfish definition: any of an order (Siluriformes) of chiefly freshwater stout-bodied scaleless bony fishes having long tactile barbels.
+    catfish definition: any of an order (Siluriformes) of chiefly 
+    freshwater stout-bodied scaleless bony fishes having long tactile barbels.
 
 Combinining flags behaves as expected
 ::
