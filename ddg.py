@@ -18,7 +18,7 @@ def main():
     parser.add_argument('-b', '--bang', action='store_true',
                         help='prefix query with ! and launch the redirect url')
     parser.add_argument('-d', '--define', action='store_true',
-                        help='prefix query with define')
+                        help='attempt to return the definition')
     parser.add_argument('-j', '--json', action='store_true',
                         help='returns the raw json output')
     parser.add_argument('-l', '--lucky', action='store_true',
@@ -39,7 +39,7 @@ def main():
         return
 
     'Determine if we need to add any prefixes based on user flags'
-    prefix = get_prefix_for_query(args)
+    prefix = '!ddg ' if args.search else '!' if args.bang else ''
 
     'Loop through each query'
     for query in queries:
@@ -85,10 +85,12 @@ def get_results_priority(args):
     """Return a result priority list based on user input"""
     redirect_mode = args.bang or args.search or args.lucky
     if redirect_mode:
-        results_priority = ['redirect', 'result', 'abstract', 'definition']
+        results_priority = ['redirect', 'result', 'abstract']
     else:
-        results_priority = ['answer',  'abstract',  'definition', 'result']
+        results_priority = ['answer',  'abstract', 'result']
 
+    insert_pos = 0 if args.define else len(results_priority)
+    results_priority.insert(insert_pos, 'definition')
     return results_priority
 
 
@@ -108,18 +110,6 @@ def get_text_or_url(args):
         return 'url'
     else:
         return 'text'
-
-
-def get_prefix_for_query(args):
-    """Build the prefix based on user input"""
-    prefix = 'define ' if args.define else ''
-
-    if args.search:
-        prefix = '!ddg ' + prefix
-    elif args.bang:
-        prefix = '!' + prefix
-
-    return prefix
 
 
 def print_result(result):
