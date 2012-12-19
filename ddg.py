@@ -16,17 +16,17 @@ def main():
     )
     parser.add_argument('query', nargs='*', help='the search query')
     parser.add_argument('-b', '--bang', action='store_true',
-                        help='prefix query with ! and launch the redirect url')
+                        help='open the !bang redirect url in a new browser tab')
     parser.add_argument('-d', '--define', action='store_true',
-                        help='return the definition')
+                        help='return the definition result')
     parser.add_argument('-j', '--json', action='store_true',
-                        help='returns the raw json output')
+                        help='return the zero-click info api json response')
     parser.add_argument('-l', '--lucky', action='store_true',
-                        help='launch the first url found')
+                        help='open the result url in a new browser tab')
     parser.add_argument('-s', '--search', action='store_true',
-                        help='launch a search on www.duckduckgo.com')
+                        help='launch a DuckDuckGo search in a new browser tab')
     parser.add_argument('-u', '--url', action='store_true',
-                        help='return the url of the result found')
+                        help='return the result url')
     args = parser.parse_args()
 
     'Get the queries'
@@ -49,6 +49,10 @@ def main():
         'Get a response from api.duckduck.com using the duckduckgo module'
         results = duckduckgo.search(query)
 
+        'If results is null, continue to the next query'
+        if not results:
+            continue
+
         'Print the raw json output and return'
         if args.json:
             print_result(results.json)
@@ -67,7 +71,6 @@ def main():
         failed_to_find_answer = True
         for r in results_priority:
             result = getattr(getattr(results, r), var)
-
             if result:
                 action(result)
                 failed_to_find_answer = False
