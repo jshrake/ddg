@@ -16,19 +16,23 @@ or from the source:
 
 Usage
 ======
-www.duckduckgo.com zero-click api for your command-line [-h] [-b] [-d] [-j] [-l] [-s] [-u] [query [query ...]]  
+::
 
-positional arguments:  
-  query         the search query  
+    ddg [-h] [-b] [-d] [-j] [-l] [-s] [-u] [query [query ...]]
 
-optional arguments:  
-  -h, --help    show this help message and exit  
-  -b, --bang    prefix query with ! and launch the redirect url  
-  -d, --define  return the definition  
-  -j, --json    returns the raw json output  
-  -l, --lucky   launch the first url found  
-  -s, --search  launch a search on www.duckduckgo.com  
-  -u, --url     return the url of the result found  
+www.duckduckgo.com zero-click api for your command-line
+
+positional arguments:
+  query         the search query
+
+optional arguments:
+  -h, --help    show this help message and exit
+  -b, --bang    open the !bang redirect url in a new browser tab
+  -d, --define  return the definition result
+  -j, --json    return the zero-click info api json response
+  -l, --lucky   open the result url in a new browser tab
+  -s, --search  launch a DuckDuckGo search in a new browser tab
+  -u, --url     return the result url
 
 Examples
 ========= 
@@ -58,11 +62,11 @@ Launch a search on `Stack Overflow`_ ::
 
     $ ddg so [c++11] lambda return values -b
 
-Launch a `search on Duck Duck Go`_ with the `-s` flag ::
+Launch a `search on Duck Duck Go`_ with `-s` ::
 
     $ ddg Lord of the Rings -s
 
-Launch `the answer url`_ directly with `-l` ::
+Launch the `result url`_ directly with `-l` ::
 
     $ ddg python webbrowser -l
 
@@ -93,6 +97,6 @@ Thanks
 .. _!Bang redirect: http://duckduckgo.com/bang.html
 .. _Stack Overflow: http://stackoverflow.com/search?q=%5Bc%2B%2B11%5D%20lambda%20return%20values
 .. _Wolfram Alpha: http://www.wolframalpha.com/input/?i=integral%20of%20sin%20x%20%2F%20x%20from%20negative%20inf%20to%20inf
-.. _the answer url: http://docs.python.org/2/library/webbrowser.html
+.. _result url: http://docs.python.org/2/library/webbrowser.html
 .. _search on Duck Duck Go: https://duckduckgo.com/?q=Lord%20of%20the%20Rings
 .. _json response: http://api.duckduckgo.com/?q=simpsons+characters&format=json&pretty=1
