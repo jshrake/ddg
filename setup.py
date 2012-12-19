@@ -14,19 +14,28 @@ entry_points = {
 }
 
 README = open('README.rst').read()
+CHANGES = open('CHANGES.rst').read()
 
 setup(
+    # General Information
     name='ddg',
-    version='0.2.0',
-    author='justinls',
-    author_email='heartlessjunkie@gmail.com',
+    version='0.2.1',
+    author='Justin Shrake',
+    author_email='justinshrake@gmail.com',
+    description='DuckDuckGo zero-click api for your command-line',
+    long_description=README + '\n' + CHANGES,
+    url='https://github.com/justinls/ddg',
+    license='MIT',
+
+    # Add packages, scripts, and other data
     packages=['duckduckgo'],
     scripts=['ddg.py'],
-    url='https://github.com/justinls/ddg',
-    description='www.duckduckgo.com zero-click api for your command-line',
-    long_description=README,
+
+    #define requirements and entry points
     install_requires=requires,
     entry_points=entry_points,
+
+    #pypi classifiers
     classifiers=[
          'Development Status :: 4 - Beta',
          'Environment :: Console',
