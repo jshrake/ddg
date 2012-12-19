@@ -26,14 +26,13 @@ def search(query, **kwargs):
         response.close()
         return Results(json)
     except urllib2.HTTPError, err:
-        print 'HTTPError = ' + str(err.code)
+        print 'Query failed with HTTPError code ' + str(err.code)
     except urllib2.URLError, err:
-        print 'URLError = ' + str(err.reason)
+        print 'Query failed with URLError ' + str(err.reason)
     except Exception:
         print 'Unhandled exception'
         raise
-    import sys
-    sys.exit("Unable to process " + query + " please try again.")
+    return None
 
 
 class Results(object):
