@@ -19,7 +19,7 @@ CHANGES = open('CHANGES.rst').read()
 setup(
     # General Information
     name='ddg',
-    version='0.2.1',
+    version='0.2.2',
     author='Justin Shrake',
     author_email='justinshrake@gmail.com',
     description='DuckDuckGo zero-click api for your command-line',

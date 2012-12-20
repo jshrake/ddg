@@ -1,6 +1,12 @@
 Release history
 ###############
 
+
+0.2.2 (2012-12-20)
+==================
+
+* Fixed the error handling for printing results with special characters
+
 0.2.1 (2012-12-18)
 ==================
 
