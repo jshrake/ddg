@@ -119,8 +119,11 @@ def print_result(result):
     """Print the result, ascii encode if necessary"""
     try:
         print result
-    except RuntimeError:
-        print result.encode('ascii', 'ignore')
+    except UnicodeEncodeError:
+        if sys.stdout.encoding:
+            print result.encode(sys.stdout.encoding, 'replace')
+        else:
+            print result.encode('utf8')
     except:
         print "Unexpected error attempting to print result"
 
