@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 """www.duckduckgo.com zero-click api for your command-line"""
 
 import sys
